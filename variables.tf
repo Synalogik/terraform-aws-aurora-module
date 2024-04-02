@@ -24,6 +24,12 @@ variable "identifier_prefix" {
   description = "Prefix for cluster and instance identifier"
 }
 
+variable "ca_cert_identifier" {
+  type        = string
+  default     = "rds-ca-rsa2048-g1"
+  description = "Identifier of the CA certificate for the DB instance"
+}
+
 variable "azs" {
   type        = list(string)
   description = "List of AZs to use"
