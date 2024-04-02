@@ -17,6 +17,7 @@ resource "aws_rds_cluster_instance" "cluster_instance_0" {
   depends_on = [aws_iam_role_policy_attachment.rds-enhanced-monitoring-policy-attach]
 
   identifier                   = var.identifier_prefix != "" ? format("%s-node-0", var.identifier_prefix) : format("%s-aurora-node-0", var.envname)
+  ca_cert_identifier           = var.ca_cert_identifier
   cluster_identifier           = aws_rds_cluster.default[0].id
   engine                       = var.engine
   engine_version               = var.engine-version
@@ -45,6 +46,7 @@ resource "aws_rds_cluster_instance" "cluster_instance_n" {
   engine                       = var.engine
   engine_version               = var.engine-version
   identifier                   = var.identifier_prefix != "" ? format("%s-node-%d", var.identifier_prefix, count.index + 1) : format("%s-aurora-node-%d", var.envname, count.index + 1)
+  ca_cert_identifier           = var.ca_cert_identifier
   cluster_identifier           = aws_rds_cluster.default[0].id
   instance_class               = var.instance_type
   publicly_accessible          = var.publicly_accessible
